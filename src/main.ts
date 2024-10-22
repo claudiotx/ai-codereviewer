@@ -83,11 +83,11 @@ function createPrompt(file: File, chunk: Chunk, prDetails: PRDetails): string {
 {"reviews": [{"lineNumber": <line_number>, "reviewComment": "<review comment>"}]}
 
 Guidelines:
-- Comment only on obvious mistakes, high cognitive complexity, or potential bugs.
-- Adhere to KISS (Keep It Simple, Stupid) principles; avoid over-engineering.
-- Don't suggest adding comments to the code.
-- Use GitHub Markdown format for comments.
-- If no issues, return an empty "reviews" array.
+- Comment ONLY on critical bugs, security flaws, or severe performance issues.
+- Ignore style issues, missing types, or minor code improvements.
+- Focus solely on problems that could lead to system failures or data corruption.
+- Use concise GitHub Markdown format for comments.
+- If no critical issues found, return an empty "reviews" array.
 
 File: "${file.to}"
 PR Title: ${prDetails.title}
@@ -96,7 +96,7 @@ PR Description:
 ${prDetails.description}
 ---
 
-Git diff:
+Git diff to review:
 \`\`\`diff
 ${chunk.content}
 ${chunk.changes
